@@ -1,6 +1,6 @@
 let container = document.querySelector(".container");
 let dino = document.querySelector(".dino");
-let cactus = document.querySelector(".cactus");
+let block = document.querySelector(".block");
 let road = document.querySelector(".road");
 let cloud = document.querySelector(".cloud");
 let score = document.querySelector(".score");
@@ -22,7 +22,7 @@ window.addEventListener("keydown" , (start)=>{
   if (start.code == "Space")
 {
     gameover.style.display = "none"
-    cactus.classList.add("cactusActive")
+    block.classList.add("blockActive")
     road.firstElementChild.style.animation = "animateRoad 3s linear infinite"
     cloud.firstElementChild.style.animation = "animateCloud 5s linear infinite"
 
@@ -32,36 +32,31 @@ window.addEventListener("keydown" , (start)=>{
 }
 })
 
-// jump your character
+window.addEventListener("keydown", (e) => {
+  if (e.key == "ArrowUp") {
+      if (dino.classList != "dinoActive") {
+          dino.classList.add("dinoActive");
 
-window.addEventListener("Keydown" , (e)=>{ 
-console.log(e);
-
-if (e.key == "ArrowUp")
-  if (dino.classList != "dinoActive")
-  {
-    dino.classList.add("dinoActive");
-
-    // remove class after 0.5s
-    setTimeout(() => {
-        dino.classList.remove("dinoActive"); 
-    }, 500);
+          setTimeout(() => {
+              dino.classList.remove("dinoActive");
+          }, 500);
+      }
   }
-
 });
 
-// `Game Over` if `character` hit the `cactus`
 let result = setInterval(() => {
   let dinoBottom = parseInt(getComputedStyle(dino).getPropertyValue("bottom"));
-  
-  let cactusLeft = parseInt(getComputedStyle(cactus).getPropertyValue("left"));
+  // console.log("dinoBottom" + dinoBottom);
 
-  if (dinoBottom <= 90 && cactusLeft >= 20 && cactusLeft <= 145){
+  let blockLeft = parseInt(getComputedStyle(block).getPropertyValue("left"));
+  // console.log("blockLeft" + blockLeft);
 
-    gameOver.style.display = "cactus";
-    cactus.classList.remove("cactusActive");
-    road.firstElementChild.style.animation = "none";
-    cloud.firstElementChild.style.animation = "none";
-    clearInterval(interval);
+  if (dinoBottom <= 90 && blockLeft >= 20 && blockLeft <= 145) {
+      gameover.style.display = "block";
+      block.classList.remove("blockActive");
+      road.firstElementChild.style.animation = "none";
+      cloud.firstElementChild.style.animation = "cloudAnimate 1.5s linear infinite"
+      clearInterval(interval);
+      playerScore = 0;
   }
 }, 10);

@@ -43,7 +43,7 @@ bottom: 180px;
     }
 }
 
-.container .cactus{
+.container .block{
     height: 80px;
     width: 120px;
     position: absolute;
@@ -51,15 +51,15 @@ bottom: 180px;
     right: -20px;
    
 }
-.container .cactus img{
+.container .block img{
     height: 100px;
     width: 120px;
 }
-.cactusActive{
-    animation: animateCactus 2s linear infinite;
+.blockActive{
+    animation: animateblock 2s linear infinite;
 }
 
-@keyframes animateCactus{
+@keyframes animateblock{
 0%
 {
 right: -125px;
